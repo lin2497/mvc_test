@@ -1,0 +1,37 @@
+﻿@model distribution_mvc.ViewModel.CourseViewModel
+@{
+    ViewBag.Title = "Course";
+}
+
+<h2>Courses</h2>
+<table class="table table-striped">
+    <tr>
+        <td>Course ID</td>
+        <td>CRN</td>
+        <td>Title</td>
+        <td>Instructor</td>
+        <td>Credit Hour(s)</td>
+        <td>Action</td>
+    </tr>
+    @for (int i = 0; i < Model.course_collection.Count; i++)
+    {
+        <tr>
+            <td>@Model.course_collection[i].id</td>
+            <td>@Model.course_collection[i].crn</td>
+            <td>@Model.course_collection[i].title</td>
+            <td>@Model.instructor_collection.Where(x => x.id == Model.course_collection[i].instructor_id).FirstOrDefault().name</td>
+            <td>@Model.course_collection[i].credit_hour</td>
+            <td>
+                @if (Model.user_schedule.Where(x => x.course_id == Model.course_collection[i].id).FirstOrDefault() == null)
+                {
+                    @Html.ActionLink("Add", "addCourse", "Html", new { course_id = Model.course_collection[i].id }, null)
+                }
+                else
+                {
+                    <span>Course Selected</span>
+                }
+            </td>
+
+        </tr>
+    }
+</table>

@@ -1,0 +1,29 @@
+﻿@model distribution_mvc.ViewModel.MyScheduleViewModel
+@{
+    ViewBag.Title = "MySchedule";
+}
+<h2>My Schedule</h2>
+@if (Model.schedule_collection.Count > 0)
+{
+    <table class="table table-striped">
+        <tr>
+            <td>Course Name</td>
+            <td>Action</td>
+        </tr>
+        @for (int i = 0; i < Model.schedule_collection.Count; i++)
+        {
+            <tr>
+                <td>
+                    @Model.course_collection.Where(c => c.id == Model.schedule_collection[i].course_id).FirstOrDefault().title
+                </td>
+                <td>
+                    @Html.ActionLink("Remove", "removeCourse", "Html", new { course_id = Model.schedule_collection[i].course_id }, null)
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <h4>You didn't pick any course yet.</h4>
+}
