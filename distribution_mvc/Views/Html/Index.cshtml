@@ -1,8 +1,26 @@
 ﻿@{
     ViewBag.Title = "Index";
+    ViewBag.Description = "";
 }
-<h2>Welcome to course register system!</h2>
-<h4>This system is for Chia - Hua Lin to practice MVC.</h4>
-<h4>Source Code: <a href="@ViewBag.github">@ViewBag.github</a></h4>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        @ViewBag.Title
+        <small>@ViewBag.Description</small>
+    </h1>
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h4>Welcome to course register system!</h4>
+                    <h4>This Course Registration System is built by ASP.NET MVC.</h4>
+                    <h4>Source Code: <a href="@ViewBag.github">@ViewBag.github</a></h4>
+                </div><!-- /.box-header -->
 
-
+            </div><!-- /.box -->
+        </div>
+    </div>
+</section><!-- /.content -->

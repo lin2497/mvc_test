@@ -1,37 +1,57 @@
 ﻿@model distribution_mvc.ViewModel.CourseViewModel
 @{
     ViewBag.Title = "Course";
+    ViewBag.Description = "";
 }
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        @ViewBag.Title
+        <small>@ViewBag.Description</small>
+    </h1>
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">@ViewBag.Title</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-striped">
+                        <tr>
+                            <td>Course ID</td>
+                            <td>CRN</td>
+                            <td>Title</td>
+                            <td>Instructor</td>
+                            <td>Credit Hour(s)</td>
+                            <td>Action</td>
+                        </tr>
+                        @for (int i = 0; i < Model.course_collection.Count; i++)
+                        {
+                            <tr>
+                                <td>@Model.course_collection[i].id</td>
+                                <td>@Model.course_collection[i].crn</td>
+                                <td>@Model.course_collection[i].title</td>
+                                <td>@Model.instructor_collection.Where(x => x.id == Model.course_collection[i].instructor_id).FirstOrDefault().name</td>
+                                <td>@Model.course_collection[i].credit_hour</td>
+                                <td>
+                                    @if (Model.user_schedule.Where(x => x.course_id == Model.course_collection[i].id).FirstOrDefault() == null)
+                        {
+                                        @Html.ActionLink("Add", "addCourse", "Html", new { course_id = Model.course_collection[i].id }, null)
+                                    }
+                                    else
+                                    {
+                                        <span>Course Selected</span>
+                                    }
+                                </td>
 
-<h2>Courses</h2>
-<table class="table table-striped">
-    <tr>
-        <td>Course ID</td>
-        <td>CRN</td>
-        <td>Title</td>
-        <td>Instructor</td>
-        <td>Credit Hour(s)</td>
-        <td>Action</td>
-    </tr>
-    @for (int i = 0; i < Model.course_collection.Count; i++)
-    {
-        <tr>
-            <td>@Model.course_collection[i].id</td>
-            <td>@Model.course_collection[i].crn</td>
-            <td>@Model.course_collection[i].title</td>
-            <td>@Model.instructor_collection.Where(x => x.id == Model.course_collection[i].instructor_id).FirstOrDefault().name</td>
-            <td>@Model.course_collection[i].credit_hour</td>
-            <td>
-                @if (Model.user_schedule.Where(x => x.course_id == Model.course_collection[i].id).FirstOrDefault() == null)
-                {
-                    @Html.ActionLink("Add", "addCourse", "Html", new { course_id = Model.course_collection[i].id }, null)
-                }
-                else
-                {
-                    <span>Course Selected</span>
-                }
-            </td>
-
-        </tr>
-    }
-</table>
+                            </tr>
+                        }
+                    </table>
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+        </div>
+    </div>
+</section><!-- /.content -->
