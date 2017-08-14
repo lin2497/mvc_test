@@ -1,7 +1,7 @@
 ﻿@model distribution_mvc.ViewModel.ScheduleViewModel
 @{
     ViewBag.Title = "Student's Schedule";
-    ViewBag.Description = "";
+    ViewBag.Description = "Displaying a student's schedule";
 }
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -15,7 +15,7 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
-                <h3>@Model.student.name's @ViewBag.Title</h3>
+                <h4>@Model.student.name's Schedule</h4>
                 @if (Model.schedule_collection.Count > 0)
                 {
                     <ul>
